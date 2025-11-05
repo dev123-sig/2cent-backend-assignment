@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-900 text-gray-100;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-gray-800 rounded-lg shadow-lg p-6;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-200;
+  }
+  
+  .btn-primary {
+    @apply btn bg-blue-600 hover:bg-blue-700 text-white;
+  }
+  
+  .btn-buy {
+    @apply btn bg-buy hover:bg-green-600 text-white;
+  }
+  
+  .btn-sell {
+    @apply btn bg-sell hover:bg-red-600 text-white;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white;
+  }
+  
+  .label {
+    @apply block text-sm font-medium text-gray-300 mb-2;
+  }
+}

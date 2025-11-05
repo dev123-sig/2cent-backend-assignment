@@ -1,0 +1,205 @@
+{
+  "info": {
+    "name": "Exchange Matching Engine API",
+    "description": "Collection of API endpoints for the Exchange Matching Engine",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Submit Buy Limit Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"buy-limit-{{$timestamp}}\",\n  \"client_id\": \"alice\",\n  \"instrument\": \"BTC-USD\",\n  \"side\": \"buy\",\n  \"type\": \"limit\",\n  \"price\": 69500,\n  \"quantity\": 1.5\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orders"]
+            }
+          }
+        },
+        {
+          "name": "Submit Sell Limit Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"sell-limit-{{$timestamp}}\",\n  \"client_id\": \"bob\",\n  \"instrument\": \"BTC-USD\",\n  \"side\": \"sell\",\n  \"type\": \"limit\",\n  \"price\": 70500,\n  \"quantity\": 0.75\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orders"]
+            }
+          }
+        },
+        {
+          "name": "Submit Market Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"market-{{$timestamp}}\",\n  \"client_id\": \"charlie\",\n  \"instrument\": \"BTC-USD\",\n  \"side\": \"buy\",\n  \"type\": \"market\",\n  \"quantity\": 0.5\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/orders/:order_id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orders", ":order_id"],
+              "variable": [
+                {
+                  "key": "order_id",
+                  "value": "your-order-id-here"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancel Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/orders/:order_id/cancel",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orders", ":order_id", "cancel"],
+              "variable": [
+                {
+                  "key": "order_id",
+                  "value": "your-order-id-here"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Market Data",
+      "item": [
+        {
+          "name": "Get Orderbook",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/orderbook?instrument=BTC-USD&levels=20",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["orderbook"],
+              "query": [
+                {
+                  "key": "instrument",
+                  "value": "BTC-USD"
+                },
+                {
+                  "key": "levels",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Recent Trades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/trades?limit=50",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["trades"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/healthz",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["healthz"]
+            }
+          }
+        },
+        {
+          "name": "Prometheus Metrics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/metrics",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["metrics"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
